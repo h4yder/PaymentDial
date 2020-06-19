@@ -7,18 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842B6C1524998BEE00240F67 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B6C1424998BEE00240F67 /* MarkerView.swift */; };
 		842F07F0248A8E1900456DAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F07EF248A8E1900456DAD /* AppDelegate.swift */; };
 		842F07F2248A8E1900456DAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F07F1248A8E1900456DAD /* SceneDelegate.swift */; };
 		842F07F4248A8E1900456DAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F07F3248A8E1900456DAD /* ViewController.swift */; };
 		842F07F7248A8E1900456DAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842F07F5248A8E1900456DAD /* Main.storyboard */; };
 		842F07F9248A8E1D00456DAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842F07F8248A8E1D00456DAD /* Assets.xcassets */; };
 		842F07FC248A8E1D00456DAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842F07FA248A8E1D00456DAD /* LaunchScreen.storyboard */; };
-		842F0804248A908B00456DAD /* PaymentWheelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842F0803248A908B00456DAD /* PaymentWheelView.xib */; };
-		842F0806248A91A700456DAD /* PaymentWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F0805248A91A700456DAD /* PaymentWheelView.swift */; };
+		842F0804248A908B00456DAD /* PaymentDialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842F0803248A908B00456DAD /* PaymentDialView.xib */; };
+		842F0806248A91A700456DAD /* PaymentDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F0805248A91A700456DAD /* PaymentDialView.swift */; };
+		84A5FFBB24928237005C45BE /* CurvedTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBA24928237005C45BE /* CurvedTextRenderer.swift */; };
+		84A5FFBD24928C1F005C45BE /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBC24928C1F005C45BE /* Bitmap.swift */; };
+		84A5FFBF24928F94005C45BE /* CGPointAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBE24928F94005C45BE /* CGPointAdditions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		842F07EC248A8E1900456DAD /* PaymentWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		841FD2C5249C4BE700DB7CAE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		841FD2C6249C4E8C00DB7CAE /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		842B6C1424998BEE00240F67 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
+		842F07EC248A8E1900456DAD /* PaymentDial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentDial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842F07EF248A8E1900456DAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842F07F1248A8E1900456DAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		842F07F3248A8E1900456DAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,8 +33,11 @@
 		842F07F8248A8E1D00456DAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842F07FB248A8E1D00456DAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842F07FD248A8E1D00456DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842F0803248A908B00456DAD /* PaymentWheelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentWheelView.xib; sourceTree = "<group>"; };
-		842F0805248A91A700456DAD /* PaymentWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWheelView.swift; sourceTree = "<group>"; };
+		842F0803248A908B00456DAD /* PaymentDialView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentDialView.xib; sourceTree = "<group>"; };
+		842F0805248A91A700456DAD /* PaymentDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDialView.swift; sourceTree = "<group>"; };
+		84A5FFBA24928237005C45BE /* CurvedTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTextRenderer.swift; sourceTree = "<group>"; };
+		84A5FFBC24928C1F005C45BE /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
+		84A5FFBE24928F94005C45BE /* CGPointAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointAdditions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +54,9 @@
 		842F07E3248A8E1900456DAD = {
 			isa = PBXGroup;
 			children = (
-				842F07EE248A8E1900456DAD /* PaymentWheel */,
+				841FD2C6249C4E8C00DB7CAE /* LICENSE.md */,
+				841FD2C5249C4BE700DB7CAE /* README.md */,
+				842F07EE248A8E1900456DAD /* PaymentDial */,
 				842F07ED248A8E1900456DAD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,14 +64,15 @@
 		842F07ED248A8E1900456DAD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				842F07EC248A8E1900456DAD /* PaymentWheel.app */,
+				842F07EC248A8E1900456DAD /* PaymentDial.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		842F07EE248A8E1900456DAD /* PaymentWheel */ = {
+		842F07EE248A8E1900456DAD /* PaymentDial */ = {
 			isa = PBXGroup;
 			children = (
+				84A5FFB924928086005C45BE /* Curved Text */,
 				842F07EF248A8E1900456DAD /* AppDelegate.swift */,
 				842F07F1248A8E1900456DAD /* SceneDelegate.swift */,
 				842F07F3248A8E1900456DAD /* ViewController.swift */,
@@ -67,18 +80,29 @@
 				842F07F8248A8E1D00456DAD /* Assets.xcassets */,
 				842F07FA248A8E1D00456DAD /* LaunchScreen.storyboard */,
 				842F07FD248A8E1D00456DAD /* Info.plist */,
-				842F0803248A908B00456DAD /* PaymentWheelView.xib */,
-				842F0805248A91A700456DAD /* PaymentWheelView.swift */,
+				842F0803248A908B00456DAD /* PaymentDialView.xib */,
+				842F0805248A91A700456DAD /* PaymentDialView.swift */,
+				842B6C1424998BEE00240F67 /* MarkerView.swift */,
 			);
-			path = PaymentWheel;
+			path = PaymentDial;
+			sourceTree = "<group>";
+		};
+		84A5FFB924928086005C45BE /* Curved Text */ = {
+			isa = PBXGroup;
+			children = (
+				84A5FFBA24928237005C45BE /* CurvedTextRenderer.swift */,
+				84A5FFBC24928C1F005C45BE /* Bitmap.swift */,
+				84A5FFBE24928F94005C45BE /* CGPointAdditions.swift */,
+			);
+			path = "Curved Text";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		842F07EB248A8E1900456DAD /* PaymentWheel */ = {
+		842F07EB248A8E1900456DAD /* PaymentDial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 842F0800248A8E1D00456DAD /* Build configuration list for PBXNativeTarget "PaymentWheel" */;
+			buildConfigurationList = 842F0800248A8E1D00456DAD /* Build configuration list for PBXNativeTarget "PaymentDial" */;
 			buildPhases = (
 				842F07E8248A8E1900456DAD /* Sources */,
 				842F07E9248A8E1900456DAD /* Frameworks */,
@@ -88,9 +112,9 @@
 			);
 			dependencies = (
 			);
-			name = PaymentWheel;
+			name = PaymentDial;
 			productName = PaymentWheel;
-			productReference = 842F07EC248A8E1900456DAD /* PaymentWheel.app */;
+			productReference = 842F07EC248A8E1900456DAD /* PaymentDial.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +132,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 842F07E7248A8E1900456DAD /* Build configuration list for PBXProject "PaymentWheel" */;
+			buildConfigurationList = 842F07E7248A8E1900456DAD /* Build configuration list for PBXProject "PaymentDial" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,7 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				842F07EB248A8E1900456DAD /* PaymentWheel */,
+				842F07EB248A8E1900456DAD /* PaymentDial */,
 			);
 		};
 /* End PBXProject section */
@@ -134,7 +158,7 @@
 				842F07FC248A8E1D00456DAD /* LaunchScreen.storyboard in Resources */,
 				842F07F9248A8E1D00456DAD /* Assets.xcassets in Resources */,
 				842F07F7248A8E1900456DAD /* Main.storyboard in Resources */,
-				842F0804248A908B00456DAD /* PaymentWheelView.xib in Resources */,
+				842F0804248A908B00456DAD /* PaymentDialView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,10 +169,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842B6C1524998BEE00240F67 /* MarkerView.swift in Sources */,
+				84A5FFBB24928237005C45BE /* CurvedTextRenderer.swift in Sources */,
 				842F07F4248A8E1900456DAD /* ViewController.swift in Sources */,
 				842F07F0248A8E1900456DAD /* AppDelegate.swift in Sources */,
+				84A5FFBF24928F94005C45BE /* CGPointAdditions.swift in Sources */,
 				842F07F2248A8E1900456DAD /* SceneDelegate.swift in Sources */,
-				842F0806248A91A700456DAD /* PaymentWheelView.swift in Sources */,
+				84A5FFBD24928C1F005C45BE /* Bitmap.swift in Sources */,
+				842F0806248A91A700456DAD /* PaymentDialView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,16 +322,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXSL9C2WJ7;
-				INFOPLIST_FILE = PaymentWheel/Info.plist;
+				INFOPLIST_FILE = PaymentDial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kodebase.PaymentWheel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodebase.PaymentDial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -313,23 +341,23 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXSL9C2WJ7;
-				INFOPLIST_FILE = PaymentWheel/Info.plist;
+				INFOPLIST_FILE = PaymentDial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kodebase.PaymentWheel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodebase.PaymentDial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		842F07E7248A8E1900456DAD /* Build configuration list for PBXProject "PaymentWheel" */ = {
+		842F07E7248A8E1900456DAD /* Build configuration list for PBXProject "PaymentDial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842F07FE248A8E1D00456DAD /* Debug */,
@@ -338,7 +366,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		842F0800248A8E1D00456DAD /* Build configuration list for PBXNativeTarget "PaymentWheel" */ = {
+		842F0800248A8E1D00456DAD /* Build configuration list for PBXNativeTarget "PaymentDial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842F0801248A8E1D00456DAD /* Debug */,
