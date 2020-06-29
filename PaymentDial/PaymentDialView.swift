@@ -27,14 +27,14 @@
 
 import UIKit
 
-@IBDesignable class PaymentDialView: UIView {
+@IBDesignable class PaymentDialView: UIView, DialThumbViewDelegate {
     
     @IBOutlet weak private var dialBody: UIView!
     @IBOutlet weak private var textView: UIView!
     @IBOutlet weak private var balanceLabel: UILabel!
     @IBOutlet weak private var fundingLabel: UILabel!
     @IBOutlet weak private var bitmapView: UIImageView!
-    @IBOutlet weak private var thumbView: UIView!
+    @IBOutlet weak private var thumbView: DialThumbView!
     @IBOutlet weak private var thumbXConstraint: NSLayoutConstraint!
     @IBOutlet weak private var thumbYConstraint: NSLayoutConstraint!
     @IBOutlet weak private var wedgeView: UIView!
@@ -112,6 +112,7 @@ import UIKit
                                      topView.topAnchor.constraint(equalTo: topAnchor),
                                      topView.bottomAnchor.constraint(equalTo: bottomAnchor)])
         
+        configureAccessibility()
         updateRoundedTextView()
         setupThumb()
         setupWedgeView()
@@ -157,11 +158,28 @@ import UIKit
         updateConstraints()
     }
     
+    private func configureAccessibility() {
+        // Configure the label's fonts to be accessible
+        for tuple in [(label: balanceLabel, maxSize: CGFloat(50.0)),
+                      (label: fundingLabel, maxSize: CGFloat(37.0))] {
+            if let font = tuple.label?.font {
+                let maximumSize: CGFloat = tuple.maxSize * UIScreen.main.bounds.width/414
+                tuple.label?.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font, maximumPointSize: maximumSize)
+            }
+        }
+
+        if let balanceLabel = balanceLabel, let fundingLabel = fundingLabel, let thumbView = thumbView {
+            accessibilityElements = [balanceLabel, fundingLabel, thumbView]
+        }
+    }
+    
     private func configureBalance() {
         balanceLabel.text = balance
         let start = balance.index(balance.startIndex, offsetBy:2)
         let end = balance.endIndex
         baseBalance = CGFloat(Float(balance[start..<end]) ?? 0.0)
+        
+        updateLabelAccessibilityValues()
     }
     
     private func updateRoundedTextView() {
@@ -184,16 +202,9 @@ import UIKit
     }
     
     private func setupThumb() {
-        let thumbViewFrame = thumbView.frame
-        thumbView.layer.cornerRadius = thumbViewFrame.size.width * 0.5
         thumbView.backgroundColor = salmonColor
-        
-        thumbView.layer.shadowRadius = 3
-        thumbView.layer.shadowOffset = CGSize(width: 0.0, height: 3)
-        thumbView.layer.shadowOpacity = 0.5
-        thumbView.layer.shadowColor = UIColor.black.cgColor
-        thumbView.layer.borderColor = UIColor.white.cgColor
-        thumbView.layer.borderWidth = 5.0
+        thumbView.accessibilityLabel = fundingLabelAccessibilityLabel()
+        thumbView.delegate = self
     }
     
     private func updateThumb() {
@@ -221,11 +232,15 @@ import UIKit
         let delta = CGPoint(x: hitpoint.x - (dialFrame.size.width * 0.5),
                             y: hitpoint.y - (dialFrame.size.height * 0.5))
         
-        var angle = atan2(delta.y, delta.x)
-        
+        let angle = atan2(delta.y, delta.x)
+        updateQuadrant(with: angle, shouldSnap: true)
+    }
+    
+    private func updateQuadrant(with estimatedAngle: CGFloat, shouldSnap: Bool) {
+        var angle = estimatedAngle
         let cosValue = cos(angle)
         let sinValue = sin(angle)
-        
+        print(angle)
         // Keep track of where we were previously
         let previousQuadrant = currentQuadrant
         /*
@@ -257,8 +272,11 @@ import UIKit
                     impactGenerator?.prepare()
                     shouldTriggerImpact = false
                 }
-
-                angle = marker.angle
+            
+                if shouldSnap {
+                    angle = marker.angle
+                }
+                
                 break
             }
             markerIndex += 1
@@ -325,6 +343,8 @@ import UIKit
         value /= (((2 * .pi) - firstMarker)/(maximumFundingAmount))
         fundingLabel.text = String(format: "£ %1.2f", value.isZero ? minimumAmount : value)
         balanceLabel.text = String(format: "£ %1.2f", baseBalance + value)
+        
+        updateLabelAccessibilityValues()
     }
     
     private func setupWedgeView() {
@@ -467,5 +487,68 @@ import UIKit
         path.closeSubpath()
         
         shapeLayer.path = path
+    }
+    
+    //MARK: - Accessibility
+    private func fundingLabelAccessibilityLabel() -> String {
+        let fundingValue = fundingLabel.text ?? "Unknown"
+        return "Top up amount. \(fundingValue)"
+    }
+    
+    private func updateLabelAccessibilityValues() {
+        let balanceValue = balanceLabel.text ?? "Unknown"
+        balanceLabel.accessibilityLabel = "Balance. \(balanceValue)"
+        
+        fundingLabel.accessibilityLabel = fundingLabelAccessibilityLabel()
+    }
+    
+    func currentFundingAmount() -> Float {
+        guard let fundingString = fundingLabel.text else {
+            return 0.0
+        }
+        
+        let start = fundingString.index(fundingString.startIndex, offsetBy:2)
+        let end = fundingString.endIndex
+        return Float(fundingString[start..<end]) ?? 0.0
+    }
+    
+    
+    // MARK: - DialThumbViewDelegate
+    func dialShouldIncrementFundingValue() {
+        let increment = angleIncrement(by: 5.0)
+        
+        angle += increment
+        
+        if currentQuadrant == 2 && angle > .pi {
+            angle -= 2 * .pi
+        }
+        
+        updateQuadrant(with: angle, shouldSnap: false)
+        postAccessibilityUpdates()
+    }
+    
+    func dialShouldDecrementFundingValue() {
+        let increment = angleIncrement(by: 5.0)
+        
+        angle -= increment
+        
+        if currentQuadrant == 3 && angle < -.pi {
+            angle += 2 * .pi
+        }
+        
+        updateQuadrant(with: angle, shouldSnap: false)
+        postAccessibilityUpdates()
+    }
+    
+    private func angleIncrement(by amount: CGFloat) -> CGFloat {
+        let firstMarker = markers[0].angle + .pi * 0.5
+        return ((2 * .pi) - firstMarker) * (amount/maximumFundingAmount)
+    }
+    
+    private func postAccessibilityUpdates() {
+        UIAccessibility.post(notification: .layoutChanged, argument: thumbView)
+        if let fundingAmount = fundingLabel.text {
+            UIAccessibility.post(notification: .announcement, argument: fundingAmount)
+        }
     }
 }

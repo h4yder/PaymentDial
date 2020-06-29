@@ -33,9 +33,89 @@ final class CurvedTextRenderer {
         let tangents: [CGPoint]
     }
     
+    private struct Constants {
+        static let maximumFontSizeDelta: CGFloat = 35.0
+    }
+    
     private var bitmap: Bitmap!
     
+    private static func accessibilityFontSizeDelta() -> CGFloat {
+        let contentSizeCategory: UIContentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+        // Based on Title 3 Row in the table at
+        // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
+        switch contentSizeCategory {
+        case .extraSmall:
+            return -3.0
+            
+        case .small:
+            return -2.0
+            
+        case .medium:
+            return -1.0
+            
+        case .large:
+            return 0.0
+            
+        case .extraLarge:
+            return 2.0
+            
+        case .extraExtraLarge:
+            return 4.0
+            
+        case .extraExtraExtraLarge:
+            return 6.0
+            
+        // Accessibility sizes
+        case .accessibilityMedium:
+            return 11.0
+            
+        case .accessibilityLarge:
+            return 17.0
+            
+        case .accessibilityExtraLarge:
+            return 23.0
+            
+        case .accessibilityExtraExtraLarge:
+            return 29.0
+            
+        case .accessibilityExtraExtraExtraLarge:
+            return Constants.maximumFontSizeDelta
+            
+        default:
+            return 0
+        }
+    }
+    
+    private static func accessibleAttributedString(for source: NSAttributedString) -> NSAttributedString {
+        var sourceFont: UIFont
+        
+        // Get the attributed string's font
+        if let attributedStringFont = source.attribute(.font, at: 0, effectiveRange: nil) as? UIFont {
+            sourceFont = attributedStringFont
+        } else {
+            sourceFont = UIFont.systemFont(ofSize: 12)
+        }
+        
+        // Get the amount we need to change our font sizw by
+        let delta = accessibilityFontSizeDelta()
+
+        guard let accessibleFont = UIFont(name: sourceFont.fontName,
+                                          size: sourceFont.pointSize + delta) else {
+                                            return source
+        }
+        
+        // Return a new string with our new font
+        let range = NSRange(location: 0, length: source.length)
+        let accessibleAttributedString = NSMutableAttributedString(attributedString: source)
+        accessibleAttributedString.addAttribute(.font, value: accessibleFont, range: range)
+        
+        return accessibleAttributedString
+    }
+    
     static func renderRoundedText(topLabel: NSAttributedString, bottomLabel: NSAttributedString, frame: CGRect) -> UIImage? {
+        
+        let accessibleTopLabel = accessibleAttributedString(for: topLabel)
+        let accessibleBottomLabel = accessibleAttributedString(for: bottomLabel)
         
         let renderer = CurvedTextRenderer()
         renderer.bitmap = Bitmap(width: frame.size.width, height: frame.size.height)
@@ -53,7 +133,11 @@ final class CurvedTextRenderer {
             return font.pointSize
         }
         
-        let lineHeight: CGFloat = fontSizeFor(topLabel) * 1.7
+        let delta = accessibilityFontSizeDelta()
+        let factor: CGFloat = 0.7
+        let lineHeightFactor = delta >= 0 ? factor * (1 - delta/Constants.maximumFontSizeDelta) : factor
+        let lineHeight: CGFloat = fontSizeFor(accessibleTopLabel) * (1 + lineHeightFactor)
+        
         let textFrame = CGRect(x: scaledFrame.origin.x + lineHeight,
                                y: scaledFrame.origin.y + lineHeight,
                                width: scaledFrame.size.width - lineHeight * 2,
@@ -74,9 +158,13 @@ final class CurvedTextRenderer {
                                                    controlPoint2: controlPoint2,
                                                    end: end)
         
-        renderer.render(attributedString: topLabel, curve: topCurve, bitmap: renderer.bitmap)
-
-        let bottomLineHeight: CGFloat = fontSizeFor(bottomLabel)
+        renderer.render(attributedString: accessibleTopLabel, curve: topCurve, bitmap: renderer.bitmap)
+        
+        let bottomFactor: CGFloat = 0.3
+        let bottomLineHeightFactor = delta >= 0 ? (1 - bottomFactor) * (delta/Constants.maximumFontSizeDelta) : 0.0
+        let fontSize = fontSizeFor(accessibleBottomLabel)
+        let bottomLineHeight = fontSize * (1 - bottomLineHeightFactor)
+        
         let bottomTextFrame = CGRect(x: scaledFrame.origin.x + bottomLineHeight,
                                      y: scaledFrame.origin.y + bottomLineHeight,
                                      width: scaledFrame.size.width - bottomLineHeight * 2,
@@ -96,7 +184,7 @@ final class CurvedTextRenderer {
                                                       controlPoint2: bottomCP2,
                                                       end: bottomEnd)
         
-        renderer.render(attributedString: bottomLabel, curve: bottomCurve, bitmap: renderer.bitmap)
+        renderer.render(attributedString: accessibleBottomLabel, curve: bottomCurve, bitmap: renderer.bitmap)
         
         guard let cgImage = renderer.bitmap.cgImage else {
             return nil

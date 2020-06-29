@@ -16,6 +16,7 @@
 		842F07FC248A8E1D00456DAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842F07FA248A8E1D00456DAD /* LaunchScreen.storyboard */; };
 		842F0804248A908B00456DAD /* PaymentDialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842F0803248A908B00456DAD /* PaymentDialView.xib */; };
 		842F0806248A91A700456DAD /* PaymentDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F0805248A91A700456DAD /* PaymentDialView.swift */; };
+		847D7AE024A813FF0072D017 /* DialThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D7ADF24A813FF0072D017 /* DialThumbView.swift */; };
 		84A5FFBB24928237005C45BE /* CurvedTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBA24928237005C45BE /* CurvedTextRenderer.swift */; };
 		84A5FFBD24928C1F005C45BE /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBC24928C1F005C45BE /* Bitmap.swift */; };
 		84A5FFBF24928F94005C45BE /* CGPointAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5FFBE24928F94005C45BE /* CGPointAdditions.swift */; };
@@ -35,6 +36,7 @@
 		842F07FD248A8E1D00456DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842F0803248A908B00456DAD /* PaymentDialView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentDialView.xib; sourceTree = "<group>"; };
 		842F0805248A91A700456DAD /* PaymentDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDialView.swift; sourceTree = "<group>"; };
+		847D7ADF24A813FF0072D017 /* DialThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialThumbView.swift; sourceTree = "<group>"; };
 		84A5FFBA24928237005C45BE /* CurvedTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTextRenderer.swift; sourceTree = "<group>"; };
 		84A5FFBC24928C1F005C45BE /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
 		84A5FFBE24928F94005C45BE /* CGPointAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointAdditions.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				842F0803248A908B00456DAD /* PaymentDialView.xib */,
 				842F0805248A91A700456DAD /* PaymentDialView.swift */,
 				842B6C1424998BEE00240F67 /* MarkerView.swift */,
+				847D7ADF24A813FF0072D017 /* DialThumbView.swift */,
 			);
 			path = PaymentDial;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847D7AE024A813FF0072D017 /* DialThumbView.swift in Sources */,
 				842B6C1524998BEE00240F67 /* MarkerView.swift in Sources */,
 				84A5FFBB24928237005C45BE /* CurvedTextRenderer.swift in Sources */,
 				842F07F4248A8E1900456DAD /* ViewController.swift in Sources */,
